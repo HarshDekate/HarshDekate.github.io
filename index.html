@@ -1,3 +1,56 @@
+<?php
+  use PHPMailerPHPMailerPHPMailer;
+  use PHPMailerPHPMailerException;
+
+  require 'vendor/phpmailer/phpmailer/src/Exception.php';
+  require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+  require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
+  // Include autoload.php file
+  require 'vendor/autoload.php';
+  // Create object of PHPMailer class
+  $mail = new PHPMailer(true);
+
+  $output = '';
+
+  if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    try {
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      // Gmail ID which you want to use as SMTP server
+      $mail->Username = 'your_email@gmail.com';
+      // Gmail Password
+      $mail->Password = 'Your Gmail Password';
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+      $mail->Port = 587;
+
+      // Email ID from which you want to send the email
+      $mail->setFrom('your_email@gmail.com');
+      // Recipient Email ID where you want to receive emails
+      $mail->addAddress('recipient_email@gmail.com');
+
+      $mail->isHTML(true);
+      $mail->Subject = 'Form Submission';
+      $mail->Body = "<h3>Name : $name <br>Email : $email <br>Message : $message</h3>";
+
+      $mail->send();
+      $output = '<div class="alert alert-success">
+                  <h5>Thankyou! for contacting us, We'll get back to you soon!</h5>
+                </div>';
+    } catch (Exception $e) {
+      $output = '<div class="alert alert-danger">
+                  <h5>' . $e->getMessage() . '</h5>
+                </div>';
+    }
+  }
+
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +115,7 @@
         <a href="https://twitter.com/HarshDekate1" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="https://github.com/HarshDekate/" class="facebook"><i class="bi bi-github"></i></a>
         <a href="https://www.instagram.com/harsh_.hd/?igshid=YmMyMTA2M2Y%3D" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="www.linkedin.com/in/harsh-dekate-b54745237" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/harsh-dekate-b54745237/" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
 
     </div>
@@ -300,7 +353,7 @@ Whether you need a simple brochure website, a complex web application, or anythi
               <a href="https://www.facebook.com/harsh.dekate.925" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="https://www.instagram.com/harsh_.hd/?igshid=YmMyMTA2M2Y%3D" class="instagram"><i class="bi bi-instagram"></i></a>
               <a href="https://github.com/HarshDekate/" class="google-plus"><i class="bi bi-github"></i></a>
-              <a href="www.linkedin.com/in/harsh-dekate-b54745237" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="https://www.linkedin.com/in/harsh-dekate-b54745237/" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
