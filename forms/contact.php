@@ -29,7 +29,7 @@
     'host' => 'smtp.gmail.com',
     'username' => 'temp69harsh@gmail.com',
     'password' => 'Harsh69temp',
-    'port' => '25'
+    'port' => '587'
   );
   
 
